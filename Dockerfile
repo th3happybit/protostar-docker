@@ -8,6 +8,7 @@ WORKDIR /protostar
 RUN apt update && apt install build-essential -y && apt-get install manpages-dev openssh-server git gdb -y
 
 # Configure SSH server
+RUN mkdir /var/run/sshd
 RUN echo 'root:protostar' | chpasswd
 COPY ./sshd_config /etc/ssh/sshd_config
 
@@ -43,8 +44,4 @@ RUN useradd -ms /bin/bash proto
 RUN echo 'proto:proto' | chpasswd
 
 # start sshd
-CMD /usr/sbin/sshd -D &
-
-USER proto
-
-# CMD ["sleep", "infinity"]
+CMD ["/usr/sbin/sshd","-D"]
