@@ -47,3 +47,4 @@ as a result of the previous command now you can connect to the container using s
 All bugs, feature requests, pull requests, feedback, etc., are welcome. [Create an issue](https://github.com/th3happybit/protostar-docker/issues).
 
 
+`Note: tools installation scripts are from ctf-tools`
