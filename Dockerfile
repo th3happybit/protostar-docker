@@ -24,7 +24,7 @@ COPY ./01-disable-aslr.conf /etc/sysctl.d/
 EXPOSE 22
 
 # Disable ASLR
-CMD ["echo 0 | tee /proc/sys/kernel/randomize_va_space"]
+#CMD ["echo 0 | tee /proc/sys/kernel/randomize_va_space"]
 
 # copy protostar code source
 COPY . .
@@ -43,5 +43,5 @@ RUN chmod u+x ./tools/*
 RUN useradd -ms /bin/bash proto
 RUN echo 'proto:proto' | chpasswd
 
-# start sshd
-CMD ["/usr/sbin/sshd","-D"]
+# disable ASLR and start sshd
+CMD ["bash", "-c", "echo 0 > /proc/sys/kernel/randomize_va_space & /usr/sbin/sshd -D"]
